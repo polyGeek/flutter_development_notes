@@ -1,3 +1,4 @@
+import 'package:development_test/example.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,6 +31,41 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+	Widget _body = Container();
+
+	@override
+	initState() {
+		super.initState();
+
+		_body = Home( callback, );
+	}
+
+
+	void callback( BodyStates bodyStates ) {
+
+		switch( bodyStates ) {
+			case BodyStates.home:
+				_body = Home( callback );
+				break;
+			case BodyStates.busy:
+				_body = Busy();
+				break;
+			case BodyStates.error:
+				_body = ErrorMsg( callback );
+				break;
+			case BodyStates.success:
+				_body = SuccessMsg( callback );
+				break;
+		}
+
+		_update();
+	}
+
+	void _update() {
+		if( mounted )
+			setState(() {});
+	}
+
 	@override
 	Widget build( BuildContext context ) {
 		return Scaffold(
@@ -37,23 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
 				title: const Text( 'Development Test' ),
 				centerTitle: true,
 			),
-			body: Padding( padding: const EdgeInsets.all(8.0),
-				child: SingleChildScrollView(
-
-					child: Column(
-						crossAxisAlignment: CrossAxisAlignment.stretch,
-
-						children: const [
-
-							Text( "Heading",
-								textAlign: TextAlign.center,
-							),
-
-							SizedBox( height: 20 ,),
-
-						],
-					),
-				),
+			body: Center(
+					child: _body
 			),
 		);
 	}
