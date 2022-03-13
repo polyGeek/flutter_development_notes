@@ -36,18 +36,29 @@ class Home extends StatelessWidget {
 
                 /// This simulates an await call to an API
                 Future.delayed( const Duration( milliseconds: 2000 ), () {
-                  Random random = Random();
-                  int randomNumber = random.nextInt(2);
-                  if( randomNumber == 0 ) {
-                    callback( BodyStates.error );
-                  } else {
-                    callback( BodyStates.success );
-                  }
-
+                  callback( BodyStates.success );
                 } );
               },
               child: const Text(
-                'SUBMIT',
+                'SUBMIT: Success',
+                textAlign: TextAlign.center,
+              )
+          ),
+
+          const SizedBox( height: 20,),
+
+          ElevatedButton(
+              onPressed: (){
+
+                callback( BodyStates.busy );
+
+                /// This simulates an await call to an API
+                Future.delayed( const Duration( milliseconds: 2000 ), () {
+                  callback( BodyStates.error );
+                } );
+              },
+              child: const Text(
+                'SUBMIT: Error',
                 textAlign: TextAlign.center,
               )
           ),
@@ -87,19 +98,27 @@ class ErrorMsg extends StatelessWidget {
               callback( BodyStates.busy );
 
               Future.delayed( const Duration( milliseconds: 2000 ), () {
-                Random random = Random();
-                int randomNumber = random.nextInt(2);
-                print( randomNumber );
-                if( randomNumber == 0 ) {
-                  callback( BodyStates.error );
-                } else {
-                  callback( BodyStates.success );
-                }
-
+                callback( BodyStates.success );
               } );
             },
             child: const Text(
-              'Try Again',
+              'Try Again: Success',
+              textAlign: TextAlign.center,
+            )
+        ),
+
+        const SizedBox( height: 20,),
+
+        ElevatedButton(
+            onPressed: (){
+              callback( BodyStates.busy );
+
+              Future.delayed( const Duration( milliseconds: 2000 ), () {
+                callback( BodyStates.error );
+              } );
+            },
+            child: const Text(
+              'Try Again: Error',
               textAlign: TextAlign.center,
             )
         ),
@@ -130,6 +149,8 @@ class SuccessMsg extends StatelessWidget {
   @override
   Widget build( BuildContext context ) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+
       children: [
         const Text( 'success' ),
 

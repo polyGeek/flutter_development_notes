@@ -1,4 +1,4 @@
-import 'package:development_test/example.dart';
+import 'package:development_test/state_views.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
 	Widget _body = Container();
 
 	@override
-	initState() {
+	void initState() {
 		super.initState();
 
 		_body = Home( callback, );
